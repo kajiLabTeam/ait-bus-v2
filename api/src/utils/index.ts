@@ -4,6 +4,10 @@ export function toBrand<T extends string, U = string>(value: U): Brand<T, U> {
   return value as Brand<T, U>;
 }
 
+export function unwrapBrand<T extends string, U = string>(value: Brand<T, U>): U {
+  return value as U;
+}
+
 export function getKeys<T extends Record<string, unknown>>(obj: T): Array<keyof T> {
   return Object.keys(obj);
 }

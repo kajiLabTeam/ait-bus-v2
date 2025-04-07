@@ -9,10 +9,10 @@ export const modeHandler = new Hono<HonoType>().get('/', c => {
 
   const date = dateSchema.safeParse(c.req.query('date'));
 
-  if (date.error) return c.json({ error: 'Invalid date format' }, { status: 400 });
+  if (date.error) return c.json({ error: 'dateが正しくありません' }, { status: 400 });
 
   const dateObj = new Date(date.data ?? new Date());
-  const mode = busRepository.getMode(dateObj);
+  const mode = busRepository.getModeByDate(dateObj);
 
   return c.json({ operationMode: mode });
 });
