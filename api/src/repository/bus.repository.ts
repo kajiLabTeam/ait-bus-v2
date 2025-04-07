@@ -616,6 +616,8 @@ export class BusRepository {
    * @param offset - 先のバスの時刻を取得する
    */
   getNextBus(datetime: Date, offset: number): NextBus {
+    datetime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+
     const mode = this.getModeByDate(datetime);
     const times = this.getBusTimes(datetime);
     console.log({ mode, times });

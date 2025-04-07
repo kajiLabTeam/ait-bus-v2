@@ -11,7 +11,10 @@ export const nextBusHandler = new Hono<HonoType>().get('/', c => {
 
   if (offset.error) return c.json({ errorMessage: 'offsetが正しくありません' }, { status: 400 });
 
-  const bus = busRepository.getNextBus(new Date(), offset.data ?? 0);
+  const bus = busRepository.getNextBus(
+    new Date(new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })),
+    offset.data ?? 0,
+  );
   console.log({ bus });
 
   return c.json({
