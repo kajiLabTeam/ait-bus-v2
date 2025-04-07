@@ -618,6 +618,7 @@ export class BusRepository {
   getNextBus(datetime: Date, offset: number): NextBus {
     const mode = this.getModeByDate(datetime);
     const times = this.getBusTimes(datetime);
+    console.log({ mode, times });
 
     const hour = datetime.getHours();
     const minute = datetime.getMinutes();
@@ -632,6 +633,7 @@ export class BusRepository {
       if (h === hour && m <= minute) return false;
       return true;
     });
+    console.log({ nextToYakusaIndex, nextToAITIndex });
     const isFirst = nextToYakusaIndex + offset === 0 && nextToAITIndex + offset === 0;
     const isLast = nextToYakusaIndex === -1 && nextToAITIndex === -1;
     const nextToYakusaTime = times.toYakusa[nextToYakusaIndex + offset];
