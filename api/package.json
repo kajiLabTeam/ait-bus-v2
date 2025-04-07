@@ -2,7 +2,7 @@
   "name": "ait-bus-v2",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "wrangler dev src/index.ts",
     "build": "vite build",
     "preview": "wrangler pages dev",
     "format": "biome format --write",
@@ -10,7 +10,10 @@
     "test": "vitest"
   },
   "dependencies": {
-    "hono": "^4.7.5"
+    "dayjs": "^1.11.13",
+    "hono": "^4.7.5",
+    "neverthrow": "^8.2.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250407.0",
@@ -19,6 +22,6 @@
     "@hono/vite-dev-server": "^0.18.2",
     "vite": "^6.1.1",
     "vitest": "^3.1.1",
-    "wrangler": "^4.4.0"
+    "wrangler": "^4.8.0"
   }
 }
