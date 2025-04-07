@@ -11,7 +11,11 @@ export const nextBusHandler = new Hono<HonoType>().get('/', c => {
 
   if (offset.error) return c.json({ errorMessage: 'offsetが正しくありません' }, { status: 400 });
 
-  const bus = busRepository.getNextBus(new Date(), offset.data ?? 0);
+  const bus = busRepository.getNextBus(
+    new Date(new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })),
+    offset.data ?? 0,
+  );
+  console.log({ bus });
 
   return c.json({
     schedule: bus.mode,
@@ -19,9 +23,9 @@ export const nextBusHandler = new Hono<HonoType>().get('/', c => {
       IsFirst: bus.isFirst,
       IsExist: bus.isLast,
     },
-    nextHourToAIT: bus.nextToAIT[0],
-    nextMinuteToAIT: bus.nextToAIT[1],
-    nextHourToYakusa: bus.nextToYakusa[0],
-    nextMinuteToYakusa: bus.nextToYakusa[1],
+    nextHourToAIT: bus.nextToAIT ? bus.nextToAIT[0] : undefined,
+    nextMinuteToAIT: bus.nextToAIT ? bus.nextToAIT[1] : undefined,
+    nextHourToYakusa: bus.nextToYakusa ? bus.nextToYakusa[0] : undefined,
+    nextMinuteToYakusa: bus.nextToYakusa ? bus.nextToYakusa[1] : undefined,
   });
 });

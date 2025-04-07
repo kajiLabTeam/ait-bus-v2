@@ -11,7 +11,7 @@ export const modeHandler = new Hono<HonoType>().get('/', c => {
 
   if (date.error) return c.json({ error: 'dateが正しくありません' }, { status: 400 });
 
-  const dateObj = new Date(date.data ?? new Date());
+  const dateObj = new Date(date.data ?? new Date(new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })));
   const mode = busRepository.getModeByDate(dateObj);
 
   return c.json({ operationMode: mode });

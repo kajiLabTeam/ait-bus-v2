@@ -26,8 +26,8 @@ interface NextBus {
   mode: Mode;
   isFirst: boolean;
   isLast: boolean;
-  nextToYakusa: [hour: number, minute: number];
-  nextToAIT: [hour: number, minute: number];
+  nextToYakusa: [hour: number, minute: number] | undefined;
+  nextToAIT: [hour: number, minute: number] | undefined;
 }
 
 export function isHour(hour: number): hour is Hour {
@@ -616,8 +616,11 @@ export class BusRepository {
    * @param offset - 先のバスの時刻を取得する
    */
   getNextBus(datetime: Date, offset: number): NextBus {
+    datetime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+
     const mode = this.getModeByDate(datetime);
     const times = this.getBusTimes(datetime);
+    console.log({ mode, times });
 
     const hour = datetime.getHours();
     const minute = datetime.getMinutes();
@@ -632,10 +635,21 @@ export class BusRepository {
       if (h === hour && m <= minute) return false;
       return true;
     });
+    console.log({ nextToYakusaIndex, nextToAITIndex });
     const isFirst = nextToYakusaIndex + offset === 0 && nextToAITIndex + offset === 0;
     const isLast = nextToYakusaIndex === -1 && nextToAITIndex === -1;
-    const nextToYakusaTime = times.toYakusa[nextToYakusaIndex + offset];
-    const nextToAITTime = times.toAIT[nextToAITIndex + offset];
+    const nextToYakusaTime = times.toYakusa.at(nextToYakusaIndex + offset);
+    const nextToAITTime = times.toAIT.at(nextToAITIndex + offset);
+
+    if (nextToYakusaTime === undefined || nextToAITTime === undefined) {
+      return {
+        mode,
+        isFirst,
+        isLast,
+        nextToYakusa: undefined,
+        nextToAIT: undefined,
+      };
+    }
 
     return {
       mode,
