@@ -20,9 +20,9 @@ export const nextBusHandler = new Hono<HonoType>().get('/', c => {
       IsFirst: bus.isFirst,
       IsExist: bus.isLast,
     },
-    nextHourToAIT: bus.nextToAIT[0],
-    nextMinuteToAIT: bus.nextToAIT[1],
-    nextHourToYakusa: bus.nextToYakusa[0],
-    nextMinuteToYakusa: bus.nextToYakusa[1],
+    nextHourToAIT: bus.nextToAIT ? bus.nextToAIT[0] : undefined,
+    nextMinuteToAIT: bus.nextToAIT ? bus.nextToAIT[1] : undefined,
+    nextHourToYakusa: bus.nextToYakusa ? bus.nextToYakusa[0] : undefined,
+    nextMinuteToYakusa: bus.nextToYakusa ? bus.nextToYakusa[1] : undefined,
   });
 });
