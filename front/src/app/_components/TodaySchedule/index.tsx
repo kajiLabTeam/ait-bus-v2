@@ -26,7 +26,7 @@ export default function TodaySchedule() {
   }, [isLoading, data]);
 
   return (
-    <section className={styles.schedule}>
+    <section className={styles.schedule} id="today-schedule">
       <h1>本日の運行ダイヤ</h1>
 
       <p className={styles.content}>{message}</p>

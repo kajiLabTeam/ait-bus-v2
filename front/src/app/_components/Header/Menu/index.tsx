@@ -7,7 +7,8 @@ const menus = [
   { id: 'next-time', label: '次の出発時間' },
   { id: 'notice', label: 'お知らせ' },
   { id: 'today-schedule', label: '今日の運行ダイヤ' },
-  { id: 'to-yakusa', label: '八草行き' },
+  { id: 'to-ait', label: '[時刻表]八草→大学' },
+  { id: 'to-yakusa', label: '[時刻表]大学→八草' },
 ] as const;
 
 export default function Menu() {
