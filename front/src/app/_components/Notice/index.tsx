@@ -2,7 +2,7 @@ import styles from './index.module.scss';
 
 export default function Notice() {
   return (
-    <section className={styles.notice}>
+    <section className={styles.notice} id="notice">
       <h1>お知らせ</h1>
 
       <div className={styles.content}>
