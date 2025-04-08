@@ -7,7 +7,10 @@ export default function Notice() {
 
       <div className={styles.content}>
         <p>
-          <a href="https://bus.bigbell.dev/">https://bus.bigbell.dev/</a> から引き継ぎました!
+          このたび、「愛工大バス時刻案内(<a href="https://bus.bigbell.dev/">bus.bigbell.dev</a>
+          )」サイトのサービスを当研究室にて引き継ぐこととなりました。
+          今後は、皆様の大学生活がより快適になるよう、利便性の高いサービスの提供に努めてまいります。
+          また、さらなる使いやすさを目指して、順次アップデートも予定しております。 どうぞよろしくお願いいたします。
         </p>
       </div>
     </section>

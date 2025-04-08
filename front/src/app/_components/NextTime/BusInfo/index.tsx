@@ -15,7 +15,7 @@ function formatHour(n: number): string {
 }
 
 function getNextTwoBuses(busTimes: undefined | [number, number][]): [string, string] {
-  if (busTimes === undefined) return ['本日の運行は終了しました', '本日の運行は終了しました'];
+  if (busTimes === undefined) return ['取得中...', '取得中...'];
 
   const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
@@ -25,7 +25,7 @@ function getNextTwoBuses(busTimes: undefined | [number, number][]): [string, str
   const afterNext = sortedBusTimes.at(1);
 
   const nextStr = next ? `${formatHour(next[0])}:${formatHour(next[1])}` : '本日の運行は終了しました';
-  const afterNextStr = afterNext ? `${formatHour(afterNext[0])}:${formatHour(afterNext[1])}` : '本日の運行は終了しました';
+  const afterNextStr = afterNext ? `${formatHour(afterNext[0])}:${formatHour(afterNext[1])}` : 'ー';
   return [nextStr, afterNextStr];
 }
 

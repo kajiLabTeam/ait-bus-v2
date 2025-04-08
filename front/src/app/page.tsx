@@ -2,6 +2,7 @@ import Header from './_components/Header';
 import Menu from './_components/Header/Menu';
 import NextTime from './_components/NextTime';
 import Notice from './_components/Notice';
+import TodaySchedule from './_components/TodaySchedule';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <main className={styles.main}>
         <NextTime />
         <Notice />
+        <TodaySchedule />
       </main>
     </>
   );
