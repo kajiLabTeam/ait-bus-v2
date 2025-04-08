@@ -2,7 +2,7 @@ import { unwrapBrand } from '@/utils';
 import { DB, destinations, type Destination } from './db.repository';
 import { isHour } from './bus.repository';
 
-export type BusTimeTable = { [key in Destination]: string[] };
+export type BusTimeTable = { [key in Destination]: [number, number][] };
 
 export class BusRepositoryV2 extends DB {
   /**
@@ -19,14 +19,14 @@ export class BusRepositoryV2 extends DB {
       };
     }
 
-    const busTimes: { [key in Destination]: string[] } = { toAIT: [], toYakusa: [] };
+    const busTimes: { [key in Destination]: [number, number][] } = { toAIT: [], toYakusa: [] };
     const timeTable = this.timeTable[mode];
 
     for (const destination of destinations) {
       for (let hour = 0; hour < 24; hour++) {
         if (!isHour(hour)) continue;
         for (const minute of timeTable[destination][hour]) {
-          busTimes[destination].push(`${hour}:${minute}`);
+          busTimes[destination].push([hour, minute]);
         }
       }
     }

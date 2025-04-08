@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import type { HonoType } from '@/types';
 import { z } from 'zod';
-import type { Mode } from '@/repository/bus.repository';
+import type { Mode } from '@/repository/db.repository';
 
 const offsetSchema = z.coerce.number().optional();
 

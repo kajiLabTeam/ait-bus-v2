@@ -9,9 +9,9 @@ const apiUrl = new URL('/api/v2/afterbus', process.env.NEXT_PUBLIC_API_URL);
 
 const destinations = ['toAIT', 'toYakusa'] as const;
 type Destination = (typeof destinations)[number];
-export type BusTimeTable = { [key in Destination]: string[] };
+export type BusTimeTable = { [key in Destination]: [number, number][] };
 type BusTimeTableRes = {
-  BusTimeTable: BusTimeTable;
+  busTimes: BusTimeTable;
 };
 
 export default function NextTime() {
@@ -26,7 +26,7 @@ export default function NextTime() {
   return (
     <section className={styles.next_time}>
       <h1>Next Time</h1>
-      <BusInfo busTimeTable={data?.BusTimeTable} />
+      <BusInfo busTimeTable={data?.busTimes} />
     </section>
   );
 }
