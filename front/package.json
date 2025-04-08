@@ -1,0 +1,33 @@
+{
+  "name": "ait-bus-v2",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "prepare": "pnpm typed:css",
+    "build": "next build",
+    "preview": "next preview",
+    "format": "biome format --write",
+    "lint": "biome lint --write",
+    "test": "vitest",
+    "typed:css": "hcm 'src/**/*.module.{css,scss,less}' -o ./.css",
+    "typed:watch": "pnpm typed:css --watch"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "hono": "^4.7.6",
+    "next": "15.2.4",
+    "ofetch": "^1.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "swr": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "happy-css-modules": "^3.2.0",
+    "postcss": "^8.5.3",
+    "sass": "^1.86.3",
+    "typescript": "^5",
+    "vitest": "^3.1.1"
+  }
+}
