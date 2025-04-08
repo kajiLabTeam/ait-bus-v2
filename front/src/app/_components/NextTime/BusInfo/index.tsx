@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import styles from './index.module.scss';
 import type { BusTimeTable } from '..';
+import { useMemo } from 'react';
 
 interface Props {
   busTimeTable: BusTimeTable | undefined;
@@ -14,10 +15,9 @@ function formatHour(n: number): string {
   return n.toString().padStart(2, '0');
 }
 
-function getNextTwoBuses(busTimes: undefined | [number, number][]): [string, string] {
+function getNextTwoBuses(busTimes: undefined | [number, number][], now: Date): [string, string] {
   if (busTimes === undefined) return ['取得中...', '取得中...'];
 
-  const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
   const sortedBusTimes = busTimes.filter(t => toNumber(t) > currentMinutes).sort((a, b) => toNumber(a) - toNumber(b));
@@ -30,10 +30,10 @@ function getNextTwoBuses(busTimes: undefined | [number, number][]): [string, str
 }
 
 export default function BusInfo({ busTimeTable }: Props) {
-  const now = dayjs().format('HH:mm');
+  const now = useMemo(() => new Date(), []);
 
-  const busTimesToAIT = getNextTwoBuses(busTimeTable?.toAIT);
-  const busTimesToYakusa = getNextTwoBuses(busTimeTable?.toYakusa);
+  const busTimesToAIT = getNextTwoBuses(busTimeTable?.toAIT, now);
+  const busTimesToYakusa = getNextTwoBuses(busTimeTable?.toYakusa, now);
 
   return (
     <div className={styles.bus_info} id="next-time">
