@@ -1,8 +1,21 @@
 import { Hono } from 'hono';
 import type { HonoType } from '@/types';
 import { z } from 'zod';
+import type { Mode } from '@/repository/bus.repository';
 
 const offsetSchema = z.coerce.number().optional();
+
+export interface NextBusResponse {
+  schedule: Mode;
+  busState: {
+    IsFirst: boolean;
+    IsExist: boolean;
+  };
+  nextHourToAIT?: number;
+  nextMinuteToAIT?: number;
+  nextHourToYakusa?: number;
+  nextMinuteToYakusa?: number;
+}
 
 export const nextBusHandler = new Hono<HonoType>().get('/', c => {
   const { busRepository } = c.var;
@@ -27,5 +40,5 @@ export const nextBusHandler = new Hono<HonoType>().get('/', c => {
     nextMinuteToAIT: bus.nextToAIT ? bus.nextToAIT[1] : undefined,
     nextHourToYakusa: bus.nextToYakusa ? bus.nextToYakusa[0] : undefined,
     nextMinuteToYakusa: bus.nextToYakusa ? bus.nextToYakusa[1] : undefined,
-  });
+  } satisfies NextBusResponse);
 });

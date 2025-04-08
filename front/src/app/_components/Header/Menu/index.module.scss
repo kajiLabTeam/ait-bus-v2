@@ -1,0 +1,36 @@
+.menu {
+  padding: 1rem;
+  background-color: rgb(247, 247, 247);
+  position: sticky;
+  top: 0;
+  border-radius: 5px 5px 0 0;
+
+  ul {
+    text-align: center;
+
+    li {
+      padding: 0 1.25em;
+      display: inline-block;
+      line-height: 2.25em;
+
+      a {
+        padding: 0 1.25em;
+        height: 2.25em;
+        line-height: 2.25em;
+        color: #636363;
+        text-decoration: none;
+        font-size: 1rem;
+        border-radius: 8px;
+        display: inline-block;
+
+        &:hover {
+          background-color: rgba(222, 222, 222, 0.25);
+        }
+
+        &.active {
+          background-color: #ffffff;
+        }
+      }
+    }
+  }
+}

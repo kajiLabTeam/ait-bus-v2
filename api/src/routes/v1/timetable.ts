@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import type { HonoType } from '@/types';
 import { z } from 'zod';
-import { destinations, modes } from '@/repository/bus.repository';
+import { destinations, modes } from '@/repository/db.repository';
 
 const modeQuerySchema = z
   .enum(['A_toAIT', 'A_toYakusa', 'B_toAIT', 'B_toYakusa', 'C_toAIT', 'C_toYakusa'])
