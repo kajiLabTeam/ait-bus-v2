@@ -1,6 +1,6 @@
-import type { BusTimeTable } from '@api/repository/busv2.repository';
 import dayjs from 'dayjs';
 import styles from './index.module.scss';
+import type { BusTimeTable } from '..';
 
 interface Props {
   busTimeTable: BusTimeTable | undefined;

@@ -3,11 +3,13 @@
 import { ofetch } from 'ofetch';
 import styles from './index.module.scss';
 import useSWR from 'swr';
-import type { BusTimeTable } from '@api/repository/busv2.repository';
 import BusInfo from './BusInfo';
 
 const apiUrl = new URL('/api/v2/afterbus', process.env.NEXT_PUBLIC_API_URL);
 
+const destinations = ['toAIT', 'toYakusa'] as const;
+type Destination = (typeof destinations)[number];
+export type BusTimeTable = { [key in Destination]: string[] };
 type BusTimeTableRes = {
   BusTimeTable: BusTimeTable;
 };
