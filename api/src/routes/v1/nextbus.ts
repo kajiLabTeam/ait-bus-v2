@@ -33,7 +33,7 @@ export const nextBusHandler = new Hono<HonoType>().get('/', c => {
     schedule: bus.mode,
     busState: {
       IsFirst: bus.isFirst,
-      IsExist: bus.isLast,
+      IsExist: bus.isExist,
     },
     nextHourToAIT: bus.nextToAIT ? bus.nextToAIT[0] : undefined,
     nextMinuteToAIT: bus.nextToAIT ? bus.nextToAIT[1] : undefined,

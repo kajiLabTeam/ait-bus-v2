@@ -5,7 +5,7 @@ import { DB, destinations } from './db.repository';
 interface NextBus {
   mode: Mode;
   isFirst: boolean;
-  isLast: boolean;
+  isExist: boolean;
   nextToYakusa: [hour: number, minute: number] | undefined;
   nextToAIT: [hour: number, minute: number] | undefined;
 }
@@ -63,26 +63,25 @@ export class BusRepository extends DB {
       return true;
     });
     const isFirst = nextToYakusaIndex + offset === 0 && nextToAITIndex + offset === 0;
-    const isLast = nextToYakusaIndex !== -1 || nextToAITIndex !== -1;
     const nextToYakusaTime = times.toYakusa.at(nextToYakusaIndex + offset);
     const nextToAITTime = times.toAIT.at(nextToAITIndex + offset);
+    const isExist = nextToYakusaTime !== undefined || nextToAITTime !== undefined;
 
-    if (nextToYakusaTime === undefined && nextToAITTime === undefined) {
+    if (isExist) {
       return {
         mode,
         isFirst,
-        isLast,
-        nextToYakusa: undefined,
-        nextToAIT: undefined,
+        isExist,
+        nextToYakusa: nextToYakusaTime ? [nextToYakusaTime[0], nextToYakusaTime[1]] : [-1, -1],
+        nextToAIT: nextToAITTime ? [nextToAITTime[0], nextToAITTime[1]] : [-1, -1],
       };
     }
-
     return {
       mode,
       isFirst,
-      isLast,
-      nextToYakusa: nextToYakusaTime ? [nextToYakusaTime[0], nextToYakusaTime[1]] : [-1, -1],
-      nextToAIT: nextToAITTime ? [nextToAITTime[0], nextToAITTime[1]]: [-1, -1],
+      isExist,
+      nextToYakusa: undefined,
+      nextToAIT: undefined,
     };
   }
 }
