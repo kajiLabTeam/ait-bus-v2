@@ -28,7 +28,6 @@ export const nextBusHandler = new Hono<HonoType>().get('/', c => {
     new Date(new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })),
     offset.data ?? 0,
   );
-  console.log({ bus });
 
   return c.json({
     schedule: bus.mode,

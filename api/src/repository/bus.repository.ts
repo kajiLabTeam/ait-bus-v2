@@ -48,7 +48,6 @@ export class BusRepository extends DB {
 
     const mode = this.getModeByDate(datetime);
     const times = this.getBusTimes(datetime);
-    console.log({ mode, times });
 
     const hour = datetime.getHours();
     const minute = datetime.getMinutes();
@@ -63,13 +62,12 @@ export class BusRepository extends DB {
       if (h === hour && m <= minute) return false;
       return true;
     });
-    console.log({ nextToYakusaIndex, nextToAITIndex });
     const isFirst = nextToYakusaIndex + offset === 0 && nextToAITIndex + offset === 0;
-    const isLast = nextToYakusaIndex === -1 && nextToAITIndex === -1;
+    const isLast = nextToYakusaIndex !== -1 || nextToAITIndex !== -1;
     const nextToYakusaTime = times.toYakusa.at(nextToYakusaIndex + offset);
     const nextToAITTime = times.toAIT.at(nextToAITIndex + offset);
 
-    if (nextToYakusaTime === undefined || nextToAITTime === undefined) {
+    if (nextToYakusaTime === undefined && nextToAITTime === undefined) {
       return {
         mode,
         isFirst,
@@ -83,8 +81,8 @@ export class BusRepository extends DB {
       mode,
       isFirst,
       isLast,
-      nextToYakusa: [nextToYakusaTime[0], nextToYakusaTime[1]],
-      nextToAIT: [nextToAITTime[0], nextToAITTime[1]],
+      nextToYakusa: nextToYakusaTime ? [nextToYakusaTime[0], nextToYakusaTime[1]] : [-1, -1],
+      nextToAIT: nextToAITTime ? [nextToAITTime[0], nextToAITTime[1]]: [-1, -1],
     };
   }
 }
